@@ -177,11 +177,7 @@ switch (postCodeArea) {
     );
   case UkPostCodeAreas.EastCentralLondon:
     return (
-      postCodeDistrictNumber === 50 ||
-      isBetween(postCodeDistrictNumber, 2, 4) ||
-      isBetween(postCodeDistrictNumber, 1, 4) ||
-      isBetween(postCodeDistrictNumber, 1, 2) ||
-      postCodeDistrictNumber === 4
+      isBetween(postCodeDistrictNumber, 1, 4) || postCodeDistrictNumber === 50
     );
   case UkPostCodeAreas.Edinburgh:
     return (
@@ -322,9 +318,7 @@ switch (postCodeArea) {
     return isBetween(postCodeDistrictNumber, 1, 12);
   case UkPostCodeAreas.NorthLondon:
     return (
-      isBetween(postCodeDistrictNumber, 1, 22) ||
-      postCodeDistrictNumber === 81 ||
-      postCodeDistrictNumber === 1
+      isBetween(postCodeDistrictNumber, 1, 22) || postCodeDistrictNumber === 81
     );
   case UkPostCodeAreas.NewcastleUponTyne:
     return (
@@ -365,9 +359,7 @@ switch (postCodeArea) {
     );
   case UkPostCodeAreas.NorthWestLondon:
     return (
-      isBetween(postCodeDistrictNumber, 1, 11) ||
-      postCodeDistrictNumber === 26 ||
-      postCodeDistrictNumber === 11
+      isBetween(postCodeDistrictNumber, 1, 11) || postCodeDistrictNumber === 26
     );
   case UkPostCodeAreas.Oldham:
     return (

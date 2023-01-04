@@ -50,7 +50,7 @@ for (const str of postcodesArr) {
 
 output += "default:\n return false;\n } \n";
 
-fs.writeFile("old-output.js", output, (err) => {
+fs.writeFile("output-old.js", output, (err) => {
   if (err) {
     throw err;
   }

@@ -1,5 +1,4 @@
 const UkPostCodeAreas = require("./postcode-areas");
-const postcodesArr = require("./postcodes-arr");
 const fs = require("fs");
 const mr = require("multi-integer-range");
 
@@ -9,7 +8,7 @@ function getObjKey(obj, value) {
 
 let postcodes = [];
 try {
-  const data = fs.readFileSync("postcodes.txt", "utf8");
+  const data = fs.readFileSync("mainland-postcodes.txt", "utf8");
   postcodes = data.split("\r\n");
 } catch (err) {
   console.error(err);
@@ -35,23 +34,23 @@ for (const item of postcodes) {
   }
 }
 
+letters.sort()
+
 for (const item of letters) {
   if (!uniqueLetters[item]) {
-    uniqueLetters[item] = "";
+    uniqueLetters[item] = [];
   }
 }
 
 for (const postcode of uniquePostcodes) {
-  let letter = postcode.split(/[0-9]+/g);
-  let number = postcode.split(/[a-zA-Z]+/g);
-  uniqueLetters[letter[0]] += number;
+  let letter = postcode.split(/[0-9]+/g)[0];
+  let number = Number(postcode.split(/[a-zA-Z]+/g)[1]);
+  uniqueLetters[letter].push(number);
 }
 
 for (const item in uniqueLetters) {
-  let numbers = uniqueLetters[item].slice(1).split(",").map(Number);
-  numbers = numbers.sort((a, b) => a - b);
-  numbers = mr.normalize(numbers);
-  uniqueLetters[item] = numbers;
+  uniqueLetters[item] = mr.normalize(uniqueLetters[item]);
+  console.log(uniqueLetters[item])
 }
 
 // CONVERSION TO CODE
