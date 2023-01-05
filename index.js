@@ -26,15 +26,17 @@ let letters = [];
 let uniqueLetters = {};
 
 for (const item of postcodes) {
-  let letter = item.replace(/[0-9]/g, "");
-  letters.push(letter);
+  if (item) {
+    let letter = item.replace(/[0-9]/g, "");
+    letters.push(letter);
 
-  if (!uniquePostcodes.includes(item)) {
-    uniquePostcodes.push(item);
+    if (!uniquePostcodes.includes(item)) {
+      uniquePostcodes.push(item);
+    }
   }
 }
 
-letters.sort()
+letters.sort();
 
 for (const item of letters) {
   if (!uniqueLetters[item]) {
@@ -43,14 +45,13 @@ for (const item of letters) {
 }
 
 for (const postcode of uniquePostcodes) {
-  let letter = postcode.split(/[0-9]+/g)[0];
-  let number = Number(postcode.split(/[a-zA-Z]+/g)[1]);
+  let letter = postcode.replace(/[0-9]/g, "");
+  let number = Number(postcode.replace(/[a-zA-Z]/g, ""));
   uniqueLetters[letter].push(number);
 }
 
 for (const item in uniqueLetters) {
   uniqueLetters[item] = mr.normalize(uniqueLetters[item]);
-  console.log(uniqueLetters[item])
 }
 
 // CONVERSION TO CODE
@@ -95,5 +96,5 @@ fs.writeFile("output.js", output, (err) => {
   if (err) {
     throw err;
   }
-  console.log("File is written successfully.");
+  console.log("output generated successfully.");
 });
