@@ -36,6 +36,22 @@ for (const item of postcodes) {
   }
 }
 
+// keys section
+
+let zonekeys = [];
+for (const postcode of uniquePostcodes) {
+  zonekeys.push({ key: `KEY-${postcode}`, value: "northern_ireland" });
+}
+zonekeys = JSON.stringify(zonekeys);
+fs.writeFile("mainland-keys.js", zonekeys, (err) => {
+  if (err) {
+    throw err;
+  }
+  console.log("keys generated successfully.");
+});
+
+// keys section end
+
 letters.sort();
 
 for (const item of letters) {
